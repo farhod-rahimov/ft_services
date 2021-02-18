@@ -1,0 +1,53 @@
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64 && chmod +x minikube
+mv ./.kube ~/goinfre/ && mv ./.minikube ~/goinfre && ln -s ~/goinfre/.kube .kube && ln -s ~/goinfre/.minikube .minikube
+
+# MINIKUBE
+./minikube start --vm-driver=virtualbox
+./minikube status
+./minikube dashboard
+./minikube stop
+./minikube delete
+./minikube addons list
+./minikube addons enable metallb
+
+eval $(./minikube docker-env)
+
+# PODS
+kubectl apply -f nginx.yaml
+kubectl get pods nginx
+kubectl delete pods nginx
+kubectl logs nginx
+kubectl describe pods nginx
+
+# DEPLOYMENT
+kubectl apply -f configmap.yaml 
+kubectl apply -f nginx.yaml 
+kubectl get deploy nginx-deployment 
+kubectl delete deploy nginx-deployment 
+
+# SERVICE
+kubectl get svc
+kubectl delete svc nginx-svc
+
+# DOCKER
+docker build -t nginx_image .
+docker image rm nginx_image
+
+
+
+kubectl delete pods nginx && docker image rm nginx_image && docker build -t nginx_image . && kubectl apply -f nginx.yaml 
+kubectl delete pods nginx && kubectl apply -f nginx.yaml 
+
+kubectl delete deploy nginx-deployment && kubectl apply -f configmap.yaml
+
+docker build -t nginx_image . && kubectl apply -f configmap.yaml && kubectl apply -f nginx.yaml  
+
+./minikube delete && ./minikube start --vm-driver=virtualbox && ./minikube addons enable metallb && eval $(./minikube docker-env) \
+&& docker build -t nginx_image . && kubectl apply -f nginx.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
+
+kubectl delete deploy nginx-deployment && kubectl delete svc nginx-svc && docker build -t nginx_image . && kubectl apply -f nginx.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
+
+
+kubectl exec /deploy/nginx_deployment -- pkill nginx
+
+etc/ssh/
