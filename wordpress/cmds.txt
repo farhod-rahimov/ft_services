@@ -1,0 +1,54 @@
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64 && chmod +x minikube
+mv ./.kube ~/goinfre/ && mv ./.minikube ~/goinfre && ln -s ~/goinfre/.kube .kube && ln -s ~/goinfre/.minikube .minikube
+
+# MINIKUBE
+./minikube start --vm-driver=virtualbox
+./minikube status
+./minikube dashboard
+./minikube stop
+./minikube delete
+./minikube addons list
+./minikube addons enable metallb
+
+eval $(./minikube docker-env)
+
+# PODS
+kubectl apply -f wordpress.yaml
+kubectl get pods wordpress
+kubectl delete pods wordpress
+kubectl logs wordpress
+kubectl describe pods wordpress
+
+# DEPLOYMENT
+kubectl apply -f configmap.yaml 
+kubectl apply -f wordpress.yaml 
+kubectl get deploy wordpress-deployment 
+kubectl delete deploy wordpress-deployment 
+
+# SERVICE
+kubectl get svc
+kubectl delete svc wordpress-svc
+
+# DOCKER
+docker build -t wordpress_image .
+docker image rm wordpress_image
+
+
+
+kubectl delete pods wordpress && docker image rm wordpress_image && docker build -t wordpress_image . && kubectl apply -f wordpress.yaml 
+kubectl delete pods wordpress && kubectl apply -f wordpress.yaml 
+
+kubectl delete deploy wordpress-deployment && kubectl apply -f configmap.yaml
+
+docker build -t wordpress_image . && kubectl apply -f configmap.yaml && kubectl apply -f wordpress.yaml  
+
+./minikube delete && ./minikube start --vm-driver=virtualbox && ./minikube addons enable metallb && eval $(./minikube docker-env) \
+&& docker build -t wordpress_image . && kubectl apply -f wordpress.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
+
+kubectl delete deploy wordpress-deployment && kubectl delete svc wordpress-svc && docker build -t wordpress_image . && kubectl apply -f wordpress.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
+
+
+kubectl exec /deploy/wordpress_deployment -- pkill wordpress
+
+etc/ssh/
+
