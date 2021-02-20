@@ -6,12 +6,15 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 18:07:50 by btammara          #+#    #+#              #
-#    Updated: 2021/02/20 09:36:50 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/20 15:40:04 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
 # /usr/bin/supervisord -c /etc/supervisord.conf
+
+php-fpm7
+nginx
 
 sh
