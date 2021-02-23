@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/23 10:10:50 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/23 10:36:18 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ COPY ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 RUN mkdir /run/mysqld
 RUN apk add --no-cache mysql mysql-client
 COPY ./my.cnf /etc/
+COPY ./new_db.sql ./
 COPY ./wordpress.sql ./
 
 # INSTALL WORDPRESS
