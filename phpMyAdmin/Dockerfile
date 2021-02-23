@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/21 19:37:54 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/23 10:10:50 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,6 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.1.0-rc2/phpMyAdmin-5.1.0-rc2-
 RUN tar -xf phpMyAdmin-5.1.0-rc2-english.tar.gz && rm -rf phpMyAdmin-5.1.0-rc2-english.tar.gz
 RUN mv phpMyAdmin-5.1.0-rc2-english phpmyadmin
 COPY ./config.inc.php phpmyadmin
-# COPY ./www.conf /etc/php7/php-fpm.d/
-# RUN mkdir -p /run/php
-# RUN mkfifo /run/php/php7.3-fpm.sock
-# RUN chmod 777 /run/php/php7.3-fpm.sock
 RUN mkdir -p /etc/nginx/snippets
 COPY ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 
@@ -46,13 +42,19 @@ RUN apk add --no-cache mysql mysql-client
 COPY ./my.cnf /etc/
 COPY ./wordpress.sql ./
 
+# INSTALL WORDPRESS
+RUN wget https://wordpress.org/latest.tar.gz
+RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
+COPY ./wp-config.php /var/www/html/
+
+
 # ISSUE SELFSIGNED SSL CERTIFICATE
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=RU/ST=Republic of Tatarstan/L=Kazan/O=21school/CN=www.localhost' -keyout /etc/ssl/certs/localhost.key -out /etc/ssl/certs/localhost.crt
 
-# ADD NEW USER
-RUN adduser -D user
-RUN echo -e "123456789*\n123456789*" | passwd user
-RUN echo -e "123456789*\n123456789*" | passwd root
+# # ADD NEW USER
+# RUN adduser -D user
+# RUN echo -e "123456789*\n123456789*" | passwd user
+# RUN echo -e "123456789*\n123456789*" | passwd root
 
 EXPOSE 5000
 
