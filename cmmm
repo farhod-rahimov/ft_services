@@ -1,0 +1,38 @@
+ apk add mariadb  mariadb-client   mariadb-server-utils
+ apk add --no-cache mariadb-openrc 
+ 
+ mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql     
+ mysql_install_db --user=root --basedir=/usr --datadir=/var/lib/mysql     
+ mysql_install_db --user=root --datadir=/var/lib/mysql 
+ mysql_install_db --user=mysql --datadir=/var/lib/mysql 
+ 
+ mkdir /var/run/mysqld 
+ mkfifo /var/run/mysqld/mysqld.sock 
+ chown -R mysql /var/run/mysqld 
+
+ apk add --no-cache php7 php7-fpm php7-common php7-gmp php7-curl php7-intl php7-mbstring php7-xmlrpc php7-gd php7-xml php7-cli php7-zip php7-soap php7-imap php7-mysqli php7-json php7-zlib php7-session 
+ mkdir -p /var/www/htm
+ cd /var/www/html
+ 
+ wget https://wordpress.org/latest.tar.gz
+ tar -xvzf latest.tar.gz && rm -rf latest.tar.gz 
+
+
+
+ /usr/bin/mysql
+
+mkdir /var/run/mysqld
+mkfifo /var/run/mysqld/mysqld.sock
+chown -R mysql /var/run/mysqld
+
+apk add --no-cache mysql mysql-client mariadb mariadb-client mariadb-doc mariadb-connector-c mariadb-backup mariadb-server-utils mariadb-dev mariadb-test mariadb-mytop mariadb-plugin-rocksdb mariadb-static mariadb-embedded mariadb-embedded-dev mariadb-openrc 
+
+docker image rm php
+docker build -t php .
+docker run --rm --name php_n -it -p 443:5000 -p 80:5000 php  
+ 
+mkdir -p /auth_pam_tool_dir
+touch /auth_pam_tool_dir/auth_pam_tool
+
+kubectl get pods
+kubectl exec -it name-pod -- sh
