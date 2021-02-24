@@ -48,6 +48,11 @@ docker build -t wordpress_image . && kubectl apply -f configmap.yaml && kubectl 
 ./minikube delete && ./minikube start --vm-driver=virtualbox && ./minikube addons enable metallb && eval $(./minikube docker-env) \
 && docker build -t phpmyadmin_image . && kubectl apply -f phpmyadmin.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
 
+./minikube delete && ./minikube start --vm-driver=virtualbox && ./minikube addons enable metallb \
+&& eval $(./minikube docker-env) && docker build -t phpmyadmin_image ./phpmyadmin && docker build -t mysql_image ./mysql \
+&& kubectl apply -f ./phpmyadmin/phpmyadmin.yaml  &&  kubectl apply -f ./phpmyadmin/configmap.yaml \
+&& kubectl apply -f ./mysql/mysql.yaml && ./minikube dashboard 
+
 kubectl delete deploy wordpress-deployment && kubectl delete svc wordpress-svc && docker build -t wordpress_image . && kubectl apply -f wordpress.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
 kubectl delete deploy phpmyadmin-deployment && kubectl delete svc phpmyadmin-svc && docker build -t phpmyadmin_image . && kubectl apply -f phpmyadmin.yaml  &&  kubectl apply -f configmap.yaml && ./minikube dashboard 
 
