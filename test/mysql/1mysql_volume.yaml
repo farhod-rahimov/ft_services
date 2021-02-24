@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: mysql
-  type: LoadBalancer 
+  type: ClusterIP 
   ports:
     - protocol: TCP
       port: 3306
@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: task-pv-storage
         persistentVolumeClaim:
-        claimName: task-pv-claim
+          claimName: task-pv-claim
       containers:
       - name: mysql
         image: mysql_image
