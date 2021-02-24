@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    phpmyadmin.sh                                      :+:      :+:    :+:    #
+#    mysql.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 18:07:50 by btammara          #+#    #+#              #
-#    Updated: 2021/02/23 13:59:38 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/24 09:09:59 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ openrc default
 mysql_install_db
 rc-service mariadb start
 mysql < ./new_db.sql
-mysql wordpress < ./wordpress.sql
+# mysql wordpress < ./wordpress.sql
 
 # rc-service mariadb restart
 # rc-service nginx start
