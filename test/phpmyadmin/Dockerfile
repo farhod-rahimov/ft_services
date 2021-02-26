@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/24 08:14:21 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/26 10:19:41 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ COPY ./config.inc.php phpmyadmin
 # COPY ./new_db.sql ./
 # COPY ./wordpress.sql ./
 
-# INSTALL WORDPRESS
-RUN wget https://wordpress.org/latest.tar.gz
-RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
-COPY ./wp-config.php /var/www/html/
+# # INSTALL WORDPRESS
+# RUN wget https://wordpress.org/latest.tar.gz
+# RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
+# COPY ./wp-config.php /var/www/html/
 
 
 # ISSUE SELFSIGNED SSL CERTIFICATE
