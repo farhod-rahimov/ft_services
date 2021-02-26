@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/26 10:20:30 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/26 13:49:32 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,6 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=RU/ST=Republic
 
 EXPOSE 5050
 
-COPY ./phpmyadmin.sh ./
-RUN chmod +x phpmyadmin.sh
-CMD ./phpmyadmin.sh
+COPY ./wordpress.sh ./
+RUN chmod +x wordpress.sh
+CMD ./wordpress.sh

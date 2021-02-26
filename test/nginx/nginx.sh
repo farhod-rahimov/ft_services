@@ -1,30 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    mysql.sh                                           :+:      :+:    :+:    #
+#    nginx.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 18:07:50 by btammara          #+#    #+#              #
-#    Updated: 2021/02/26 13:46:04 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/18 09:30:44 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
-openrc default
-mysql_install_db
-rc-service mariadb start
-mysql < ./new_db.sql
-mysql wordpress < ./wordpress.sql
-
-# rc-service mariadb restart
-# rc-service nginx start
-# rc-service php-fpm7 start
-# rc-service php-fpm7 stop
-
-rc-service mariadb stop
-
+ssh-keygen -A
 /usr/bin/supervisord -c /etc/supervisord.conf
-
-sh
