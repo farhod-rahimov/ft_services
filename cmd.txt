@@ -67,7 +67,8 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && docker build -t mysql_image ./mysql && kubectl apply -f mysql/mysql.yaml \
 && docker build -t phpmyadmin_image ./phpmyadmin && kubectl apply -f phpmyadmin/configmap.yaml && kubectl apply -f phpmyadmin/phpmyadmin.yaml \
 && docker build -t wordpress_image ./wordpress && kubectl apply -f wordpress/wordpress.yaml \
-&& docker build -t nginx_image ./nginx && kubectl apply -f nginx/nginx.yaml && ./minikube dashboard    
+&& docker build -t nginx_image ./nginx && kubectl apply -f nginx/nginx.yaml \
+&& docker build -t ftps_image ./ftps && kubectl apply -f ftps/ftps.yaml && ./minikube dashboard    
 
 kubectl delete pvc mysql-pv-claim && kubectl delete pv mysql-pv-volume
 
@@ -78,7 +79,10 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && kubectl delete deploy wordpress-deployment && kubectl delete svc wordpress-svc && docker build -t wordpress_image ./wordpress \
 && kubectl apply -f wordpress/wordpress.yaml \
 && kubectl delete deploy nginx-deployment && kubectl delete svc nginx-svc && docker build -t nginx_image ./nginx \
-&& kubectl apply -f nginx/nginx.yaml && ./minikube dashboard    
+&& kubectl apply -f nginx/nginx.yaml \
+&& kubectl delete deploy ftps-deployment && kubectl delete svc ftps-svc && docker build -t ftps_image ./ftps \
+&& kubectl apply -f ftps/ftps.yaml \
+&& ./minikube dashboard    
 
 kubectl expose deployment mysql-deployment --port 3306 --type=ClusterIP 
 kubectl expose deployment phpmyadmin-deployment --type=LoadBalancer 
