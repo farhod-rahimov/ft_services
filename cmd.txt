@@ -68,7 +68,8 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && docker build -t phpmyadmin_image ./phpmyadmin && kubectl apply -f phpmyadmin/configmap.yaml && kubectl apply -f phpmyadmin/phpmyadmin.yaml \
 && docker build -t wordpress_image ./wordpress && kubectl apply -f wordpress/wordpress.yaml \
 && docker build -t nginx_image ./nginx && kubectl apply -f nginx/nginx.yaml \
-&& docker build -t ftps_image ./ftps && kubectl apply -f ftps/ftps.yaml && ./minikube dashboard    
+&& docker build -t ftps_image ./ftps && kubectl apply -f ftps/ftps.yaml \
+&& docker build -t grafana_image ./grafana && kubectl apply -f grafana/grafana.yaml && ./minikube dashboard    
 
 kubectl delete pvc mysql-pv-claim && kubectl delete pv mysql-pv-volume
 
@@ -82,6 +83,8 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && kubectl apply -f nginx/nginx.yaml \
 && kubectl delete deploy ftps-deployment && kubectl delete svc ftps-svc && docker build -t ftps_image ./ftps \
 && kubectl apply -f ftps/ftps.yaml \
+&& kubectl delete deploy grafana-deployment && kubectl delete svc grafana-svc && docker build -t grafana_image ./grafana \
+&& kubectl apply -f grafana/grafana.yaml \
 && ./minikube dashboard    
 
 kubectl expose deployment mysql-deployment --port 3306 --type=ClusterIP 
@@ -90,3 +93,23 @@ kubectl expose deployment phpmyadmin-deployment --type=LoadBalancer
 kubectl exec /deploy/wordpress_deployment -- pkill wordpress
 
 etc/ssh/
+
+show databases
+show users
+
++ rc-service influxdb start 
++ influx -precision rfc3339 
++ create database mydb 
++ create user admin with password 'admin' with all privileges 
+
+но сначала надо настройки поменять затем в докерфайли скопировать этот конф в /etc/telegraf/ и прописать в supervisore
+./telegraf-1.17.3/usr/bin/telegraf --config /etc/telegraf/telegraf.conf
++ cd ./grafana-7.3.7/bin/ 
++ && ./grafana-server 
+
+открываем графану в браузере
+URL http://127.0.0.1:8086
+Databse mydb
+User admin
+Pass admin
+Save&test и ждать
