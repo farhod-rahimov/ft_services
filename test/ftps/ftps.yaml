@@ -14,11 +14,11 @@ spec:
       port: 21
       targetPort: 21
     - name: p1
-      port: 31110
-      targetPort: 31110
+      port: 2100
+      targetPort: 2100
     - name: p2
-      port: 31111
-      targetPort: 31111
+      port: 2101
+      targetPort: 2101
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -42,5 +42,5 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 21
-        - containerPort: 31110
-        - containerPort: 31111
+        - containerPort: 2100
+        - containerPort: 2101
