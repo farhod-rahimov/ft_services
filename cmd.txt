@@ -69,7 +69,8 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && docker build -t wordpress_image ./wordpress && kubectl apply -f wordpress/wordpress.yaml \
 && docker build -t nginx_image ./nginx && kubectl apply -f nginx/nginx.yaml \
 && docker build -t ftps_image ./ftps && kubectl apply -f ftps/ftps.yaml \
-&& docker build -t grafana_image ./grafana && kubectl apply -f grafana/grafana.yaml && ./minikube dashboard    
+&& docker build -t grafana_image ./grafana && kubectl apply -f grafana/grafana.yaml \
+&& docker build -t influxdb_image ./influxdb && kubectl apply -f influxdb/influxdb.yaml && ./minikube dashboard    
 
 kubectl delete pvc mysql-pv-claim && kubectl delete pv mysql-pv-volume
 
@@ -85,6 +86,8 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && kubectl apply -f ftps/ftps.yaml \
 && kubectl delete deploy grafana-deployment && kubectl delete svc grafana-svc && docker build -t grafana_image ./grafana \
 && kubectl apply -f grafana/grafana.yaml \
+&& kubectl delete deploy influxdb-deployment && kubectl delete svc influxdb-svc && docker build -t influxdb_image ./influxdb \
+&& kubectl apply -f influxdb/influxdb.yaml \
 && ./minikube dashboard    
 
 kubectl expose deployment mysql-deployment --port 3306 --type=ClusterIP 
@@ -104,8 +107,8 @@ show users
 
 но сначала надо настройки поменять затем в докерфайли скопировать этот конф в /etc/telegraf/ и прописать в supervisore
 ./telegraf-1.17.3/usr/bin/telegraf --config /etc/telegraf/telegraf.conf
-+ cd ./grafana-7.3.7/bin/ 
-+ && ./grafana-server 
+cd ./grafana-7.3.7/bin/ 
+&& ./grafana-server 
 
 открываем графану в браузере
 URL http://127.0.0.1:8086
@@ -113,3 +116,5 @@ Databse mydb
 User admin
 Pass admin
 Save&test и ждать
+
+influxdb-svc:8086
