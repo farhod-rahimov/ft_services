@@ -120,7 +120,7 @@ User admin
 Pass admin
 Save&test и ждать
 
-influxdb-svc:8086
+influxdb-svc:8086 
 
 docker build -t ftps_image ./ftps_test && kubectl apply -f ftps_test/ftps.yaml && kubectl apply -f ftps_test/configmap.yaml \
 && ./minikube dashboard
