@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/28 11:00:29 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/28 14:37:53 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,22 @@ COPY ./supervisord.conf /etc/supervisord.conf
 WORKDIR /var/www/html/
 RUN apk add influxdb
 
+# RUN mkdir ./influx_backup
+# COPY ./influx_backup/* ./influx_backup/
+# # RUN rc-service influxdb start; exit 0
+# RUN influxd restore -portable ./influx_backup; exit 0
+# RUN rc-service influxdb stop; exit 0
+
 # INSTALL TELEGRAF
 COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
 RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd64.tar.gz 
 RUN mkdir /etc/telegraf
 COPY ./telegraf.conf /etc/telegraf/
+
+# INSTALL GLIBC
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk
+RUN apk add glibc-2.33-r0.apk
 
 # # INSTALL GLIBC
 # RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub

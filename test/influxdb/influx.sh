@@ -6,17 +6,23 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 18:07:50 by btammara          #+#    #+#              #
-#    Updated: 2021/02/28 11:00:48 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/28 14:29:01 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
 openrc default
-rc-service influxdb start
+# rc-service influxdb start
 echo "create user admin with password 'admin' with all privileges" | influx -precision rfc3339
-echo "create database mydb" | influx -precision rfc3339 / в конфиге база создается
-rc-service influxdb stop
+echo "create database ftps" | influx -precision rfc3339
+echo "create database grafana" | influx -precision rfc3339
+echo "create database influxdb" | influx -precision rfc3339
+echo "create database mysql" | influx -precision rfc3339
+echo "create database nginx" | influx -precision rfc3339
+echo "create database phpmyadmin" | influx -precision rfc3339
+echo "create database wordpress" | influx -precision rfc3339
+# rc-service influxdb stop
 # rc-service influxdb stop
 # sh -c "./grafana-7.3.7/bin/grafana-server"
 # vsftpd /etc/vsftpd/vsftpd.conf

@@ -90,6 +90,9 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 && kubectl apply -f influxdb/influxdb.yaml \
 && ./minikube dashboard    
 
+kubectl apply -f phpmyadmin/configmap.yaml
+
+
 kubectl expose deployment mysql-deployment --port 3306 --type=ClusterIP 
 kubectl expose deployment phpmyadmin-deployment --type=LoadBalancer 
 
@@ -118,3 +121,9 @@ Pass admin
 Save&test и ждать
 
 influxdb-svc:8086
+
+docker build -t ftps_image ./ftps_test && kubectl apply -f ftps_test/ftps.yaml && kubectl apply -f ftps_test/configmap.yaml \
+&& ./minikube dashboard
+
+kubectl delete deploy ftps-deployment && kubectl delete svc ftps-svc && docker build -t ftps_image ./ftps_test \
+&& kubectl apply -f ftps_test/ftps.yaml && kubectl apply -f ftps_test/configmap.yaml && ./minikube dashboard 

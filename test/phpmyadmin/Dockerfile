@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/26 10:19:41 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/28 14:38:19 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,17 @@ RUN tar -xf phpMyAdmin-5.1.0-rc2-english.tar.gz && rm -rf phpMyAdmin-5.1.0-rc2-e
 RUN mv phpMyAdmin-5.1.0-rc2-english phpmyadmin
 COPY ./config.inc.php phpmyadmin
 # COPY ./www.conf /etc/php7/php-fpm.d/ 
+
+# INSTALL TELEGRAF
+COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
+RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd64.tar.gz 
+RUN mkdir /etc/telegraf
+COPY ./telegraf.conf /etc/telegraf/
+
+# INSTALL GLIBC
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk
+RUN apk add glibc-2.33-r0.apk
 
 # # INSTALL MYSQL
 # RUN mkdir /run/mysqld

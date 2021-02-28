@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/24 08:13:20 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/28 14:38:02 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,23 @@ COPY ./supervisord.conf /etc/supervisord.conf
 # # COPY ./www.conf /etc/php7/php-fpm.d/ 
 
 # INSTALL MYSQL
+WORKDIR /var/www/html/
 RUN mkdir /run/mysqld
 RUN apk add --no-cache mysql mysql-client
 COPY ./my.cnf /etc/
 COPY ./new_db.sql ./
 COPY ./wordpress.sql ./
+
+# INSTALL TELEGRAF
+COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
+RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd64.tar.gz 
+RUN mkdir /etc/telegraf
+COPY ./telegraf.conf /etc/telegraf/
+
+# INSTALL GLIBC
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk
+RUN apk add glibc-2.33-r0.apk
 
 # # INSTALL WORDPRESS
 # RUN wget https://wordpress.org/latest.tar.gz

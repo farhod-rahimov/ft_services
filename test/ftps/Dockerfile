@@ -6,14 +6,14 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/27 13:59:35 by btammara         ###   ########.fr        #
+#    Updated: 2021/02/28 14:37:25 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM alpine:3.12
 
 # UPDATE & UPGARDE PACKAGES & INSTALL OPENRC, VIM
-RUN apk update && apk upgrade && apk add --no-cache openrc && apk add vim
+RUN apk update && apk upgrade && apk add --no-cache openrc && apk add vim && apk add wget
 # RUN apk add php7 php7-fpm  php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session php7-opcache
 # RUN apk add php7 php7-gd php7-zlib php7-curl php7-mbstring php7-opcache
 # RUN apk add php7-fpm php7-mysqli php7-xml php7-simplexml php7-json php7-iconv php7-tokenizer php7-xmlwriter php7-session php7-mbstring
@@ -50,9 +50,21 @@ RUN apk update && apk upgrade && apk add --no-cache openrc && apk add vim
 # COPY ./wp-config.php /var/www/html/
 
 # INSTALL FTPS
+WORKDIR /var/www/html/
 RUN apk add vsftpd openssl
 COPY ./vsftpd.conf /etc/vsftpd/vsftpd.conf
 # COPY ./wp-config.php /var/www/html/
+
+# INSTALL GLIBC
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk
+RUN apk add glibc-2.33-r0.apk
+
+# INSTALL TELEGRAF
+COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
+RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd64.tar.gz 
+RUN mkdir /etc/telegraf
+COPY ./telegraf.conf /etc/telegraf/
 
 # ISSUE SELFSIGNED SSL CERTIFICATE
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=RU/ST=Republic of Tatarstan/L=Kazan/O=21school/CN=www.localhost' -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem
