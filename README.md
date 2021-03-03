@@ -7,7 +7,9 @@ First you need to install ``minikube``, ``virtualbox`` and ``docker``.
 
 
 You can download ``minikube`` for macOS(school21) from this [website](https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64).
-chmod +x [your_downloaded_file]
+
+``chmod +x [your_downloaded_file]``
+
 
 
 ``minikube`` binary file should be moved to /usr/local/bin.
