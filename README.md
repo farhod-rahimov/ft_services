@@ -6,7 +6,7 @@ What is ft_server? Please read en.subject.pdf
 First you need to install ``minikube``, ``virtualbox`` and ``docker``.
 
 
-You can download ``minikube`` for macOS(school21) from this [website] https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64.
+You can download ``minikube`` for macOS(school21) from this [website] [https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64]
 
 
 ``minikube`` binary file should be moved to /usr/local/bin.
