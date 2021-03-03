@@ -6,21 +6,17 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/28 14:38:11 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 10:33:51 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM alpine:3.12
 
 # UPDATE & UPGARDE PACKAGES & INSTALL VIM
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade && apk add vim
 
-# INSTALL VIM
-RUN apk add vim
-
-# INSTALL NGINX, SSH AND SUPERVISOR
-RUN apk add nginx openssl supervisor
-RUN apk add openssh
+# INSTALL NGINX, OPENSSH AND SUPERVISOR
+RUN apk add nginx openssl supervisor openssh
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./supervisord.conf /etc/supervisord.conf
 

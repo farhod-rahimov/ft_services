@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/03/03 09:49:27 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 10:24:27 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,6 @@ COPY ./data/* /var/www/html/grafana-7.3.7/data/
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk
 RUN apk add glibc-2.33-r0.apk
-# COPY ./config.inc.php phpmyadmin
-# COPY ./www.conf /etc/php7/php-fpm.d/ 
 
 # INSTALL TELEGRAF
 COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
@@ -35,16 +33,8 @@ RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd
 RUN mkdir /etc/telegraf
 COPY ./telegraf.conf /etc/telegraf/
 
-# # INSTALL TELEGRAF
-# COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./
-# RUN tar -zxvf telegraf-1.17.3_linux_amd64.tar.gz && rm telegraf-1.17.3_linux_amd64.tar.gz 
-# RUN mkdir /etc/telegraf
-# RUN cp ./telegraf-1.17.3/etc/telegraf/telegraf.conf /etc/telegraf/
-
 EXPOSE 3000
 
 COPY ./grafana.sh ./
 RUN chmod +x grafana.sh
 CMD ./grafana.sh
-# RUN cd /var/www/html/grafana-7.3.7/bin
-# ENTRYPOINT [ "sh", "./grafana-server"]
