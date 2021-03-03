@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/03/03 10:25:49 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 11:27:59 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ COPY ./supervisord.conf /etc/supervisord.conf
 # INSTALL INFLUXDB
 WORKDIR /var/www/html/
 RUN apk add influxdb
+RUN mkdir -p /var/lib/influxdb/meta
+RUN mkdir -p /var/lib/influxdb/wal
+RUN mkdir -p /var/lib/influxdb/data
 
 # INSTALL TELEGRAF
 COPY ./telegraf-1.17.3_linux_amd64.tar.gz ./

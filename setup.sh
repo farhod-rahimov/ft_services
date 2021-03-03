@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/03 10:52:27 by btammara          #+#    #+#              #
-#    Updated: 2021/03/03 11:15:18 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 13:17:57 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,4 +49,4 @@ docker build -t influxdb_image ./srcs/influxdb
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
 
 # LAUNCH MINIKUBE DASHBOARD
-./srcs/minikube dashboard &
+./srcs/minikube dashboard
