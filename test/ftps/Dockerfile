@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 17:27:06 by btammara          #+#    #+#              #
-#    Updated: 2021/02/28 14:37:25 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 09:44:03 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ RUN apk update && apk upgrade && apk add --no-cache openrc && apk add vim && apk
 # php7-common php7-gmp php7-curl php7-intl php7-xmlrpc php7-gd php7-cli php7-zip php7-soap php7-imap
 
 # INSTALL NGINX, OPENSSL, SUPERVISOR
-# RUN apk add supervisor
-# COPY ./supervisord.conf /etc/supervisord.conf
+RUN apk add supervisor
+COPY ./supervisord.conf /etc/supervisord.conf
 # RUN apk add nginx openssl supervisor
 # RUN mkdir -p /run/nginx
 # RUN mkdir -p /etc/nginx/snippets

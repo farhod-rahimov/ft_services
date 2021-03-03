@@ -6,7 +6,7 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 18:07:50 by btammara          #+#    #+#              #
-#    Updated: 2021/02/28 14:22:15 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 09:51:46 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ openrc default
 # rc-service php-fpm7 stop
 
 # rc-service mariadb stop
-tail -F /dev/null
+# tail -F /dev/null
 
 /usr/bin/supervisord -c /etc/supervisord.conf
 

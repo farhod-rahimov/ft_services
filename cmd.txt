@@ -63,7 +63,7 @@ kubectl delete deploy mysql-deployment && kubectl delete svc mysql-svc && docker
 
 
 
-./minikube delete && ./minikube start --vm-driver=virtualbox && ./minikube addons enable metallb && eval $(./minikube docker-env) \
+./minikube delete && ./minikube start --vm-driver=virtualbox --cpus=4 --memmory=15g --disk-size=50g && ./minikube addons enable metallb && eval $(./minikube docker-env) \
 && docker build -t mysql_image ./mysql && kubectl apply -f mysql/mysql.yaml \
 && docker build -t phpmyadmin_image ./phpmyadmin && kubectl apply -f phpmyadmin/configmap.yaml && kubectl apply -f phpmyadmin/phpmyadmin.yaml \
 && docker build -t wordpress_image ./wordpress && kubectl apply -f wordpress/wordpress.yaml \
