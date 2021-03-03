@@ -12,7 +12,7 @@ You can download ``minikube`` for macOS(school21) from this [website] https://st
 ``minikube`` binary file should be moved to /usr/local/bin.
 
 
-If you don't have permission to that directory, you can move it here to srcs, but don't forget to edit setup.sh: ``minikube`` replace to ``./minikube``.
+If you don't have permission to that directory, you can move it here to srcs, but don't forget to edit setup.sh: ``minikube`` replace to ``./srcs/minikube``.
 
 
 Now you can run ``setup.sh``

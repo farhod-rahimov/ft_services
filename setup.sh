@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 # MINIKUBE START
-./srcs/minikube stop
-./srcs/minikube delete
-./srcs/minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
-./srcs/minikube addons enable metallb
-eval $(./srcs/minikube docker-env)
+minikube stop
+minikube delete
+minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
+minikube addons enable metallb
+eval $(minikube docker-env)
 
 # APLLY CONFIGMAP
 kubectl apply -f ./srcs/metallb/configmap.yaml
@@ -49,4 +49,4 @@ docker build -t influxdb_image ./srcs/influxdb
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
 
 # LAUNCH MINIKUBE DASHBOARD
-./srcs/minikube dashboard
+minikube dashboard
