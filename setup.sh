@@ -6,15 +6,16 @@
 #    By: btammara <btammara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/03 10:52:27 by btammara          #+#    #+#              #
-#    Updated: 2021/03/03 11:06:02 by btammara         ###   ########.fr        #
+#    Updated: 2021/03/03 11:15:18 by btammara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# # MINIKUBE START
-# ./srcs/minikube delete
-# ./srcs/minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
-# ./srcs/minikube addons enable metallb
-# eval $(./srcs/minikube docker-env)
+# MINIKUBE START
+./srcs/minikube stop
+./srcs/minikube delete
+./srcs/minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
+./srcs/minikube addons enable metallb
+eval $(./srcs/minikube docker-env)
 
 # APLLY CONFIGMAP
 kubectl apply -f ./srcs/metallb/configmap.yaml
