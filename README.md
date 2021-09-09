@@ -1,6 +1,6 @@
 # ft_services
 
-What is ft_server? Please read en.subject.pdf
+What is ft_services? Please read en.subject.pdf
 
 ## RUN COMMANDS:
 First you need to install ``minikube``, ``virtualbox`` and ``docker``.
